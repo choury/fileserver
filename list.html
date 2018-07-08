@@ -1,0 +1,63 @@
+{{define "body"}}
+<div class="container">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">{{Basename .Path}}</a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <form role="form" name="upload" class="navbar-form navbar-right" action='#' method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <input type="file" class="form-control" name="file" onChange="setuploadurl(this.value);">
+                </div>
+                <button type="submit" class="btn btn-default">上传</button>
+            </form>
+        </div>
+    </nav>
+    <div class="navbar-wrapper">
+        <div class="navbar navbar-static-top">
+            <ol class="breadcrumb" id="breadcrumb">
+            </ol>
+        </div>
+    </div>
+
+    <ul class="list-group">
+    {{range $_,$file := .Files}}
+        <li class="list-group-item">
+        {{if $file.Isdir}}
+            <a href='/list?page={{$.PagePath }}/0&path={{$file.Path}}'>{{Basename $file.Path}}</a>
+            <a href='/del?path={{$file.Path}}' class="pull-right">删除</a>
+        {{else if $file.Isimg}}
+            <a class="thumbnail text-left" href='/img?page={{$.PagePath }}/0&path={{$file.Path}}'>
+                <img src='/download?path={{$file.Path}}' class="img-responsive lazyload" />
+            </a>
+            <a href='/del?path={{$file.Path}}'>删除</a>
+        {{else if $file.Istxt}}
+            <a href='/txt?page={{$.PagePath }}/0&path={{$file.Path}}'>{{Basename $file.Path}}</a>
+            <p class="pull-right">
+                <a href='/del?path={{$file.Path}}'>删除</a>
+            </p>
+        {{else if $file.Isvid}}
+            <a href='/video?page={{$.PagePath }}/0&path={{$file.Path}}'>{{Basename $file.Path}}</a>
+            <p class="pull-right">
+                <a href='/del?path={{$file.Path}}'>删除</a>
+            </p>
+        {{else}}
+            <a href='/download?path={{$file.Path}}' download='{{Basename $file.Path}}'>{{Basename $file.Path}}</a>
+            <p class="pull-right">
+                <a href='/del?path={{$file.Path}}'>删除</a>
+            </p>
+        {{end}}
+        </li>
+    {{end}}
+    </ul>
+    {{if eq .Page 0}}
+        <a href='#' class="btn btn-default" disabled="disabled">上一页</a>
+    {{else}}
+    <a href='/list?page={{Dirname .PagePath}}/{{Dec .Page}}&path={{.Path}}&p={{Dec .Page}}' class="btn btn-default">上一页</a>
+    {{end}}
+    <a href='/list?page={{Dirname .PagePath}}/{{Inc .Page}}&path={{.Path}}&p={{Inc .Page}}' class="btn btn-default">下一页</a>
+</div>
+{{end}}

@@ -1,0 +1,74 @@
+{{define "header"}}
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>{{Basename .Path}}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/normal.css">
+<link rel="stylesheet" href="css/stickup.css">
+<link rel="stylesheet" href="css/px-video.css" />
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/stickUp.min.js"></script>
+<script src="js/lazysizes.min.js"></script>
+<script type="text/javascript">
+jQuery(function($) {
+    $(document).ready(function() {
+        $('.navbar-wrapper').stickUp();
+    });
+});
+
+function basename(path) {
+    path=path.replace(/\\/g,'/');
+    if(path.substr(-1)=="/"){
+        path=path.slice(0,-1);
+    }
+    return path.replace( /.*\//, '' );
+}
+function dirname(path) {
+    path=path.replace(/\\/g,'/');
+    if(path.substr(-1)=="/"){
+        path=path.slice(0,-1);
+    }
+    if(path.substr(1).indexOf("/") == -1){
+        return "/"
+    }
+    return path.replace(/\/[^\/]*$/, '');
+}
+
+function setuploadurl(value) {
+    document.upload.action += '/' + encodeURIComponent(basename(value));
+}
+
+function createbream(path, page){
+    var bol = document.getElementById("breadcrumb");
+    var newli=document.createElement("li");
+    newli.innerHTML=basename(path);
+    newli.class="active";
+    bol.insertBefore(newli,bol.firstChild);
+    while(1){
+        path=dirname(path);
+        page=dirname(page);
+        if(path=="/")
+            break;
+        newli=document.createElement("li");
+        newli.innerHTML="<a href='/list?page="+page+"&path="+path+"&p="+basename(page)+"'>"+basename(path)+"</a>";
+        bol.insertBefore(newli,bol.firstChild)
+    }
+    newli=document.createElement("li");
+    newli.innerHTML="<a href='/'>首页</a>";
+    bol.insertBefore(newli,bol.firstChild);
+    console.log(bol);
+}
+</script>
+</head>
+<body onload=''>
+{{template "body" .}}
+<script type="text/javascript">
+createbream("{{.Path}}", "{{.PagePath}}");
+</script>
+</body>
+</html>
+{{end}}

@@ -1,0 +1,48 @@
+{{define "body"}}
+<div class="container">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">{{Basename .Path}}</a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href='/download?path={{.Path}}' download='{{Basename .Path}}'>下载</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="navbar-wrapper">
+        <div class="navbar navbar-static-top">
+            <ol class="breadcrumb" id="breadcrumb">
+            </ol>
+        </div>
+    </div>
+    <div class="px-video-container center" id="myvid">
+        <div class="px-video-img-captions-container">
+            <video width="640" height="360" controls autoplay="autoplay" preload="auto">
+                <!-- video files -->
+                <source src="/download?path={{.Path}}" type="video/mp4" />
+
+                <!-- text track file
+                <track kind="captions" label="none" src="#" srclang="en" default />
+                -->
+            </video>
+            <div class="px-video-captions hide"></div>
+        </div><!-- end container for captions and video -->
+        <div class="px-video-controls"></div>
+    </div><!-- end video container -->
+    <script src="js/px-video.js"></script>
+    <script>
+        // Initialize
+        new InitPxVideo({
+            "videoId": "myvid",
+            "captionsOnDefault": false,
+            "seekInterval": 20,
+            "videoTitle": "clips of stand-up comedy",
+            "debug": true
+        });
+    </script>
+</div>
+{{end}}

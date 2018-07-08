@@ -1,0 +1,37 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "Mr4ur60bgQJnQFfJY0dGtwWwMPE=",
+			"path": "golang.org/x/text/encoding",
+			"revision": "ac87088df8ef557f1e32cd00ed0b6fbc3f7ddafb",
+			"revisionTime": "2017-08-24T15:10:30Z"
+		},
+		{
+			"checksumSHA1": "zeHyHebIZl1tGuwGllIhjfci+wI=",
+			"path": "golang.org/x/text/encoding/internal",
+			"revision": "ac87088df8ef557f1e32cd00ed0b6fbc3f7ddafb",
+			"revisionTime": "2017-08-24T15:10:30Z"
+		},
+		{
+			"checksumSHA1": "9cg4nSGfKTIWKb6bWV7U4lnuFKA=",
+			"path": "golang.org/x/text/encoding/internal/identifier",
+			"revision": "ac87088df8ef557f1e32cd00ed0b6fbc3f7ddafb",
+			"revisionTime": "2017-08-24T15:10:30Z"
+		},
+		{
+			"checksumSHA1": "55UdScb+EMOCPr7OW0hCwDsVxpg=",
+			"path": "golang.org/x/text/encoding/simplifiedchinese",
+			"revision": "ac87088df8ef557f1e32cd00ed0b6fbc3f7ddafb",
+			"revisionTime": "2017-08-24T15:10:30Z"
+		},
+		{
+			"checksumSHA1": "ziMb9+ANGRJSSIuxYdRbA+cDRBQ=",
+			"path": "golang.org/x/text/transform",
+			"revision": "ac87088df8ef557f1e32cd00ed0b6fbc3f7ddafb",
+			"revisionTime": "2017-08-24T15:10:30Z"
+		}
+	],
+	"rootPath": "github.com/choury/bdisk"
+}

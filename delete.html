@@ -1,0 +1,20 @@
+{{define "body"}}
+<script type="text/javascript">
+function setfrom(){
+    document.cookie = "from="+document.referrer;
+}
+</script>
+<div class="container">
+    <div class="alert alert-danger">
+        <strong>确定删除"{{Basename $.Path}}"？</strong>
+        <ul class="pager paper-lg">
+            <li class="previous">
+                <a href='#' onclick="javascript:history.go(-1)">返回</a>
+            </li>
+            <li class="next">
+                <a class="alert alert-danger" onclick="javascript:setfrom()" href="/del?confirm=yes&path={{$.Path}}">确定</a>
+            </li>
+        </ul>
+    </div>
+</div>
+{{end}}

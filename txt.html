@@ -1,0 +1,26 @@
+{{define "body"}}
+<div class="container">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">{{Basename .Path}}</a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href='/txt?path={{.Path}}&encode=gbk'>GBK编码</a></li>
+                <li><a href='/txt?path={{.Path}}&encode=utf8'>UTF-8编码</a></li>
+                <li><a href='/download?path={{.Path}}' download='{{Basename .Path}}'>下载</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="navbar-wrapper">
+        <div class="navbar navbar-static-top">
+            <ol class="breadcrumb" id="breadcrumb">
+            </ol>
+        </div>
+    </div>
+    <pre style="word-wrap: break-word; white-space: pre-wrap; white-space: -moz-pre-wrap">{{.Content | html}}</pre>
+</div>
+{{end}}

@@ -1,0 +1,14 @@
+{{define "body"}}
+<div class="container">
+    <h1 class="text-center">{{Basename .Path}}</h1>
+    <div class="navbar-wrapper">
+        <div class="navbar navbar-static-top">
+            <ol class="breadcrumb" id="breadcrumb">
+            </ol>
+        </div>
+    </div>
+    <div class="center">
+        <img src='/download?path={{$.Path}}' />
+    </div>
+</div>
+{{end}}
