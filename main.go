@@ -168,7 +168,6 @@ func download(w http.ResponseWriter, r *http.Request) {
 	for {
 		date, ok := <-out
 		if !ok {
-			fmt.Println("download end")
 			return
 		}
 		w.Write(date)

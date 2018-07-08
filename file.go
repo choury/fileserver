@@ -89,7 +89,6 @@ func Download(path string, start, length int64, cancel <-chan bool) (chan []byte
 
 	out := make(chan []byte)
 	go func() {
-		defer fmt.Println("read return")
 		defer file.Close()
 		defer close(out)
 		for length > 0 {
@@ -100,14 +99,12 @@ func Download(path string, start, length int64, cancel <-chan bool) (chan []byte
 				data := make([]byte, 64*1024)
 				count, err := file.Read(data)
 				if err == io.EOF {
-					fmt.Println("read EOF end")
 					return
 				}
 				if err != nil {
 					panic(err.Error())
 				}
 				if count == 0 {
-					fmt.Println("read 0 end")
 					return
 				}
 				out <- data[:count]
