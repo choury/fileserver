@@ -58,7 +58,7 @@ function createbream(path, page){
         bol.insertBefore(newli,bol.firstChild)
     }
     newli=document.createElement("li");
-    newli.innerHTML="<a href='/'>首页</a>";
+    newli.innerHTML="<a href='/list?page="+page+"&p="+basename(page)+"'>首页</a>";
     bol.insertBefore(newli,bol.firstChild);
     console.log(bol);
 }

@@ -191,11 +191,25 @@ type filelist struct {
 }
 
 var funcMap = template.FuncMap{
-	"Inc": func(i int) int {
-		return i + 1
+	"Inc": func(p int) int {
+		return p + 1
 	},
-	"Dec": func(i int) int {
-		return i - 1
+	"Dec": func(p int) int {
+		return p - 1
+	},
+	"IncPage": func(PagePath string) string {
+		dir := filepath.Dir(PagePath)
+		base := filepath.Base(PagePath)
+		page, _ := strconv.Atoi(base)
+		page++
+		return filepath.Join(dir, strconv.Itoa(page))
+	},
+	"DecPage": func(PagePath string) string {
+		dir := filepath.Dir(PagePath)
+		base := filepath.Base(PagePath)
+		page, _ := strconv.Atoi(base)
+		page--
+		return filepath.Join(dir, strconv.Itoa(page))
 	},
 	"Basename": filepath.Base,
 	"Dirname": func(path string) string {

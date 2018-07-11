@@ -30,17 +30,17 @@
             <a href='/list?page={{$.PagePath }}/0&path={{$file.Path}}'>{{Basename $file.Path}}</a>
             <a href='/del?path={{$file.Path}}' class="pull-right">删除</a>
         {{else if $file.Isimg}}
-            <a class="thumbnail text-left" href='/img?page={{$.PagePath }}/0&path={{$file.Path}}'>
+            <a class="thumbnail text-left" href='/img?page={{$.PagePath }}/0&path={{$file.Path}}' target="_blank">
                 <img src='/download?path={{$file.Path}}' class="img-responsive lazyload" />
             </a>
             <a href='/del?path={{$file.Path}}'>删除</a>
         {{else if $file.Istxt}}
-            <a href='/txt?page={{$.PagePath }}/0&path={{$file.Path}}'>{{Basename $file.Path}}</a>
+            <a href='/txt?page={{$.PagePath }}/0&path={{$file.Path}}' target="_blank">{{Basename $file.Path}}</a>
             <p class="pull-right">
                 <a href='/del?path={{$file.Path}}'>删除</a>
             </p>
         {{else if $file.Isvid}}
-            <a href='/video?page={{$.PagePath }}/0&path={{$file.Path}}'>{{Basename $file.Path}}</a>
+            <a href='/video?page={{$.PagePath }}/0&path={{$file.Path}}' target="_blank">{{Basename $file.Path}}</a>
             <p class="pull-right">
                 <a href='/del?path={{$file.Path}}'>删除</a>
             </p>
@@ -56,8 +56,8 @@
     {{if eq .Page 0}}
         <a href='#' class="btn btn-default" disabled="disabled">上一页</a>
     {{else}}
-    <a href='/list?page={{Dirname .PagePath}}/{{Dec .Page}}&path={{.Path}}&p={{Dec .Page}}' class="btn btn-default">上一页</a>
+    <a href='/list?page={{DecPage .PagePath}}&path={{.Path}}&p={{Dec .Page}}' class="btn btn-default">上一页</a>
     {{end}}
-    <a href='/list?page={{Dirname .PagePath}}/{{Inc .Page}}&path={{.Path}}&p={{Inc .Page}}' class="btn btn-default">下一页</a>
+    <a href='/list?page={{IncPage .PagePath}}&path={{.Path}}&p={{Inc .Page}}' class="btn btn-default">下一页</a>
 </div>
 {{end}}
