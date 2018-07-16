@@ -4,6 +4,7 @@ import (
 	"io"
 	"io/ioutil"
 	"math"
+	"mime/multipart"
 	"os"
 	"path/filepath"
 	"time"
@@ -116,4 +117,14 @@ func Download(path string, start, length int64, cancel <-chan bool) (chan []byte
 
 func Delete(path string) error {
 	return os.Remove(filepath.Join(BasePath, path))
+}
+
+func Save(path string, file multipart.File) error {
+	f, err := os.OpenFile(filepath.Join(BasePath, path), os.O_WRONLY|os.O_CREATE, 0666)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+	_, err = io.Copy(f, file)
+	return err
 }

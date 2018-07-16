@@ -31,6 +31,7 @@ func main() {
 	mux.HandleFunc("/video", showvid)
 	mux.HandleFunc("/txt", showtext)
 	mux.HandleFunc("/del", del)
+	mux.HandleFunc("/upload", upload)
 	mux.HandleFunc("/test", hello)
 	panic(http.ListenAndServe(":8080", mux))
 }
@@ -377,4 +378,28 @@ func del(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Println("Execute:", err.Error())
 	}
+}
+
+func upload(w http.ResponseWriter, r *http.Request) {
+	from, _ := r.Cookie("from")
+	r.ParseForm()
+	if r.Method != http.MethodPost {
+		http.Error(w, "Method not allowed.", http.StatusMethodNotAllowed)
+		return
+	}
+	path := r.FormValue("path")
+	r.ParseMultipartForm(32 << 20)
+	file, handler, err := r.FormFile("file")
+	if err != nil {
+		fmt.Println("FormFile: ", err.Error())
+		http.Error(w, err.Error(), http.StatusServiceUnavailable)
+		return
+	}
+	defer file.Close()
+	if err := Save(filepath.Join(path, handler.Filename), file); err != nil {
+		fmt.Println("save file: ", err.Error())
+		http.Error(w, err.Error(), http.StatusServiceUnavailable)
+		return
+	}
+	http.Redirect(w, r, from.Value, http.StatusFound)
 }

@@ -38,10 +38,6 @@ function dirname(path) {
     return path.replace(/\/[^\/]*$/, '');
 }
 
-function setuploadurl(value) {
-    document.upload.action += '/' + encodeURIComponent(basename(value));
-}
-
 function createbream(path, page){
     var bol = document.getElementById("breadcrumb");
     var newli=document.createElement("li");
