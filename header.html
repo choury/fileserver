@@ -50,7 +50,7 @@ function createbream(path, page){
         if(path=="/")
             break;
         newli=document.createElement("li");
-        newli.innerHTML="<a href='/list?page="+page+"&path="+path+"&p="+basename(page)+"'>"+basename(path)+"</a>";
+        newli.innerHTML="<a href='/list?page="+page+"&path="+encodeURIComponent(path)+"&p="+basename(page)+"'>"+basename(path)+"</a>";
         bol.insertBefore(newli,bol.firstChild)
     }
     newli=document.createElement("li");
