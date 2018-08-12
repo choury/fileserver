@@ -29,7 +29,8 @@ func (file File) Isimg() bool {
 		ext == ".JPG" ||
 		ext == ".jpeg" ||
 		ext == ".gif" ||
-		ext == ".png"
+		ext == ".png" ||
+		ext == ".PNG"
 }
 
 func (file File) Istxt() bool {
@@ -42,7 +43,8 @@ func (file File) Isvid() bool {
 	ext := filepath.Ext(file.Path)
 	return ext == ".mkv" ||
 		ext == ".MKV" ||
-		ext == ".mp4"
+		ext == ".mp4" ||
+		ext == ".MP4"
 }
 
 func GetFileList(path string, page int) ([]File, error) {
