@@ -14,6 +14,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/gorilla/handlers"
 	"golang.org/x/text/encoding/simplifiedchinese"
 	"golang.org/x/text/transform"
 )
@@ -33,7 +34,7 @@ func main() {
 	mux.HandleFunc("/del", del)
 	mux.HandleFunc("/upload", upload)
 	mux.HandleFunc("/test", hello)
-	panic(http.ListenAndServe(":8080", mux))
+	panic(http.ListenAndServe("127.0.0.1:8080", handlers.LoggingHandler(os.Stdout, mux)))
 }
 
 func hello(w http.ResponseWriter, r *http.Request) {
