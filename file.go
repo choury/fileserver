@@ -7,6 +7,7 @@ import (
 	"mime/multipart"
 	"os"
 	"path/filepath"
+	"strings"
 	"time"
 )
 
@@ -23,28 +24,32 @@ func (file File) Basename() string {
 	return filepath.Base(file.Path)
 }
 
-func (file File) Isimg() bool {
+var (
+	imageExt = []string{".jpg", ".gif", ".png"}
+	textExt  = []string{".txt"}
+	videoExt = []string{".mkv", ".mp4", ".mov"}
+)
+
+func (file File) isExt(Exts []string) bool {
 	ext := filepath.Ext(file.Path)
-	return ext == ".jpg" ||
-		ext == ".JPG" ||
-		ext == ".jpeg" ||
-		ext == ".gif" ||
-		ext == ".png" ||
-		ext == ".PNG"
+	for _, e := range Exts {
+		if strings.EqualFold(ext, e) {
+			return true
+		}
+	}
+	return false
+}
+
+func (file File) Isimg() bool {
+	return file.isExt(imageExt)
 }
 
 func (file File) Istxt() bool {
-	ext := filepath.Ext(file.Path)
-	return ext == ".txt" ||
-		ext == ".TXT"
+	return file.isExt(textExt)
 }
 
 func (file File) Isvid() bool {
-	ext := filepath.Ext(file.Path)
-	return ext == ".mkv" ||
-		ext == ".MKV" ||
-		ext == ".mp4" ||
-		ext == ".MP4"
+	return file.isExt(videoExt)
 }
 
 func GetFileList(path string, page int) ([]File, error) {
