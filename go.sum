@@ -1,0 +1,4 @@
+github.com/gorilla/handlers v1.4.1-0.20181012153334-350d97a79266 h1:7E1EoqEYc4FLfeXGKhqshwM7d+DpQjCfeYgrr6EYykk=
+github.com/gorilla/handlers v1.4.1-0.20181012153334-350d97a79266/go.mod h1:Qkdc/uu4tH4g6mTK6auzZ766c4CA0Ng8+o/OAirnOIQ=
+golang.org/x/text v0.0.0-20170825072521-ac87088df8ef h1:MsmiU90vB2BugQDlhKHsmsI1ncYbpxi+UJJs8ooGPWY=
+golang.org/x/text v0.0.0-20170825072521-ac87088df8ef/go.mod h1:NqM8EUOU14njkJ3fqMW+pc6Ldnwhi/IjpwHt7yyuwOQ=

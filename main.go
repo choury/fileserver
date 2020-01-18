@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"errors"
+	"flag"
 	"fmt"
 	"html/template"
 	"io/ioutil"
@@ -19,8 +20,11 @@ import (
 	"golang.org/x/text/transform"
 )
 
+var listen = flag.String("listen", "127.0.0.1:8080", "listen endpoint")
+
 func main() {
-	BasePath = os.Args[1]
+	flag.Parse()
+	BasePath = flag.Arg(0)
 	mux := http.NewServeMux()
 	mux.Handle("/css/", http.FileServer(http.Dir(".")))
 	mux.Handle("/js/", http.FileServer(http.Dir(".")))
@@ -34,7 +38,7 @@ func main() {
 	mux.HandleFunc("/del", del)
 	mux.HandleFunc("/upload", upload)
 	mux.HandleFunc("/test", hello)
-	panic(http.ListenAndServe("127.0.0.1:8080", handlers.LoggingHandler(os.Stdout, mux)))
+	panic(http.ListenAndServe(*listen, handlers.LoggingHandler(os.Stdout, mux)))
 }
 
 func hello(w http.ResponseWriter, r *http.Request) {
